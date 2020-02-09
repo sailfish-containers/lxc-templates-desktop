@@ -71,21 +71,15 @@ wget_wrapper() {
 }
 
 download_file() {
-  if ! wget_wrapper -T 30 -q "https://${DOWNLOAD_SERVER}/$1" -O "$2" >/dev/null 2>&1; then
-    if ! wget_wrapper -T 30 -q "http://${DOWNLOAD_SERVER}/$1" -O "$2" >/dev/null 2>&1; then
-      if [ "$3" = "noexit" ]; then
-        return 1
-      else
-        echo "ERROR: Failed to download http://${DOWNLOAD_SERVER}/$1" 1>&2
-        exit 1
-      fi
-    elif [ "${DOWNLOAD_SHOW_HTTP_WARNING}" = "true" ]; then
-      DOWNLOAD_SHOW_HTTP_WARNING="false"
-      echo "WARNING: Failed to download the file over HTTPs" 1>&2
-      echo "         The file was instead download over HTTP " 1>&2
-      echo "A server replay attack may be possible!" 1>&2
-    fi
-  fi
+	# workaround for wget's tmp directory
+	mkdir -p "$2"
+	rm -rf "$2"
+  	
+  	# replace wget with curl
+	curl "https://${DOWNLOAD_SERVER}/$1" -L -o "$2"
+	
+	#echo "https://${DOWNLOAD_SERVER}/$1"
+	#echo "$2"
 }
 
 download_sig() {
@@ -322,8 +316,8 @@ if [ "${DOWNLOAD_LIST_IMAGES}" = "true" ] || [ "${DOWNLOAD_INTERACTIVE}" = "true
   DOWNLOAD_INDEX_PATH="/meta/1.0/index-${DOWNLOAD_MODE}"
 
   echo "Downloading the image index"
-  if ! download_file "${DOWNLOAD_INDEX_PATH}.${DOWNLOAD_COMPAT_LEVEL}" "${DOWNLOAD_TEMP}/index" noexit ||
-     ! download_sig "${DOWNLOAD_INDEX_PATH}.${DOWNLOAD_COMPAT_LEVEL}.asc" "${DOWNLOAD_TEMP}/index.asc" noexit; then
+  if ! download_file "${DOWNLOAD_INDEX_PATH}" "${DOWNLOAD_TEMP}/index" noexit ||
+     ! download_sig "${DOWNLOAD_INDEX_PATH}.asc" "${DOWNLOAD_TEMP}/index.asc" noexit; then
     download_file "${DOWNLOAD_INDEX_PATH}" "${DOWNLOAD_TEMP}/index" normal
     download_sig "${DOWNLOAD_INDEX_PATH}.asc" "${DOWNLOAD_TEMP}/index.asc" normal
   fi
