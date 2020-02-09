@@ -31,7 +31,7 @@ DOWNLOAD_SHOW_HTTP_WARNING="true"
 DOWNLOAD_TARGET="system"
 DOWNLOAD_URL=
 DOWNLOAD_USE_CACHE="false"
-DOWNLOAD_VALIDATE="true"
+DOWNLOAD_VALIDATE="false" # sailfish gpg workaround
 DOWNLOAD_VARIANT="default"
 DOWNLOAD_TEMP=
 
@@ -512,7 +512,7 @@ if [ ! -e "${configfile}" ]; then
 fi
 
 ## Extract all the network config entries
-sed -i -e "/lxc.net.0/{w ${LXC_PATH}/config-network" -e "d}" "${LXC_PATH}/config"
+#sed -i -e "/lxc.net.0/{w ${LXC_PATH}/config-network" -e "d}" "${LXC_PATH}/config"
 
 ## Extract any other config entry
 sed -i -e "/lxc./{w ${LXC_PATH}/config-auto" -e "d}" "${LXC_PATH}/config"
@@ -521,7 +521,7 @@ sed -i -e "/lxc./{w ${LXC_PATH}/config-auto" -e "d}" "${LXC_PATH}/config"
 {
   echo ""
   echo "# Distribution configuration"
-  cat "$configfile"
+  cat "$configfile" | grep arch # remove possible non-existent mount points on sfos
 } >> "${LXC_PATH}/config"
 
 ## Add the container-specific config
@@ -529,7 +529,7 @@ sed -i -e "/lxc./{w ${LXC_PATH}/config-auto" -e "d}" "${LXC_PATH}/config"
   echo ""
   echo "# Container specific configuration"
   if [ -e "${LXC_PATH}/config-auto" ]; then
-    cat "${LXC_PATH}/config-auto"
+    cat "${LXC_PATH}/config-auto" | grep rootfs # remove bridge network on sfos
     rm "${LXC_PATH}/config-auto"
   fi
   if [ -e "${fstab}" ]; then
@@ -538,15 +538,22 @@ sed -i -e "/lxc./{w ${LXC_PATH}/config-auto" -e "d}" "${LXC_PATH}/config"
   echo "lxc.uts.name = ${LXC_NAME}"
 } >> "${LXC_PATH}/config"
 
-## Re-add the previously removed network config
-if [ -e "${LXC_PATH}/config-network" ]; then
-  {
-    echo ""
-    echo "# Network configuration"
-    cat "${LXC_PATH}/config-network"
-    rm "${LXC_PATH}/config-network"
-  } >> "${LXC_PATH}/config"
-fi
+## sfos container config
+{
+	echo ""
+	echo "# Network configuration"
+	echo "lxc.net.0.type = none" 
+
+	echo "# mount wayland display socket"
+	echo "lxc.mount.entry = /run/display display none bind,create=dir 0 0"
+
+	echo "# mount pulseaudio socket"
+	echo "lxc.mount.entry = /run/user/100000/pulse pulse none bind,create=dir 0 0"
+
+	echo "# optional : host desktop"
+	echo "#lxc.mount.entry = /home/nemo/Desktop home/user/Desktop none bind 0 0"
+
+} >> "${LXC_PATH}/config"
 
 TEMPLATE_FILES="${LXC_PATH}/config"
 
