@@ -8,6 +8,7 @@ License:        GPL
 URL:            https://github.com/sailfish-containers
 Source0:        %{name}-%{version}.tar.gz
 BuildArch:      noarch
+Requires:       lxc
 
 %description
 LXC templates adapted to sailfishOS
