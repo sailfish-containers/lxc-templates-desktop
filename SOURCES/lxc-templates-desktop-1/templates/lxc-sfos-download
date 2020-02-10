@@ -515,6 +515,7 @@ sed -i -e "/lxc./{w ${LXC_PATH}/config-auto" -e "d}" "${LXC_PATH}/config"
 {
   echo ""
   echo "# Distribution configuration"
+  echo "lxc.include = /usr/share/lxc/config/common.conf"
   cat "$configfile" | grep arch # remove possible non-existent mount points on sfos
 } >> "${LXC_PATH}/config"
 
@@ -539,10 +540,13 @@ sed -i -e "/lxc./{w ${LXC_PATH}/config-auto" -e "d}" "${LXC_PATH}/config"
 	echo "lxc.net.0.type = none" 
 
 	echo "# mount wayland display socket"
-	echo "lxc.mount.entry = /run/display display none bind,create=dir 0 0"
+	echo "lxc.mount.entry = /run/display opt/display none bind,create=dir 0 0"
 
 	echo "# mount pulseaudio socket"
-	echo "lxc.mount.entry = /run/user/100000/pulse pulse none bind,create=dir 0 0"
+	echo "lxc.mount.entry = /run/user/100000/pulse opt/pulse none bind,create=dir 0 0"
+
+  echo "# mount guest additions"
+  echo "lxc.mount.entry = /usr/share/sailfish-containers/guestscripts opt/guest none bind,create=dir 0 0"
 
 	echo "# optional : host desktop"
 	echo "#lxc.mount.entry = /home/nemo/Desktop home/user/Desktop none bind 0 0"
