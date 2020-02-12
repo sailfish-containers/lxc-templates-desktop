@@ -88,7 +88,7 @@ this script is meant to help configuring network and xfce4 environment on contai
 
 desktop sessions requires a qxcompositor's display socket inside /run/display/ directory, named "**wayland-container-ID**", to create it you can use:
 ```
-# qxcompositor --wayland-socket-name ../../desktop/wayland-container-0 &
+# qxcompositor --wayland-socket-name ../../display/wayland-container-0 &
 ```
 
 then it is possible to start a desktop passing the wayland display's id (in this case 0) as follows
