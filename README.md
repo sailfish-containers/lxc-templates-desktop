@@ -11,7 +11,7 @@ This package includes:
 $ cd
 $ git clone git@github.com:sailfish-containers/lxc-templates-desktop.git
 $ mv lxc-templates-desktop rpmbuild
-$ rpmbuild --bb SPEC/lxc-templates-desktop-1.0.spec
+$ rpmbuild --bb rpmbuild/SPEC/lxc-templates-desktop-1.0.spec
 ```
 
 ## install 
