@@ -11,7 +11,7 @@ BuildArch:      noarch
 Requires:       lxc
 
 %description
-LXC templates adapted to sailfishOS
+LXC templates adapted to SailfishOS
 
 %prep
 %setup -q
@@ -26,10 +26,14 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/usr/share/lxc/templates
 cp templates/* $RPM_BUILD_ROOT/usr/share/lxc/templates/
 
-# create quest additions directory
-mkdir -p $RPM_BUILD_ROOT/usr/share/sailfish-containers/guestscripts/blobs
-cp -ar guestscripts/* $RPM_BUILD_ROOT/usr/share/sailfish-containers/guestscripts
-chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guestscripts/*
+# create quest scripts directory
+mkdir -p $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest
+cp -ar guest/* $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest
+
+# make scripts executable
+chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/setup_debian.sh
+chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/start_desktop.sh
+chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/sessions/*.sh
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -37,14 +41,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %dir /usr/share/lxc/templates
-%dir /usr/share/sailfish-containers/guestscripts
-%dir /usr/share/sailfish-containers/guestscripts/blobs
+%dir /usr/share/sailfish-containers/guest
 /usr/share/lxc/templates/lxc-sfos-download
-/usr/share/sailfish-containers/guestscripts/setup_debian.sh
-/usr/share/sailfish-containers/guestscripts/start_desktop.sh
-/usr/share/sailfish-containers/guestscripts/session_xfce4.sh
+/usr/share/sailfish-containers/guest/setup_debian.sh
+/usr/share/sailfish-containers/guest/start_desktop.sh
+/usr/share/sailfish-containers/guest/sessions/xfce4.sh
 %doc
 
 %changelog
-* Sun Feb 9 2020 sailfish containers
+* Tue Feb 11 2020 sailfish containers
 - release 1.0 - initial release

@@ -1,6 +1,11 @@
 #!/bin/bash
 # lxc start desktop session on xwayland as user
 # run as root
+if [ "$#" -ne 1 ] 
+then
+	echo "[+] usage: $0 [wayland-display-id]"
+	exit 0
+fi
 
 if [ ! -d "/run/user/100000" ]
 then
@@ -16,13 +21,13 @@ then
 	chown -R user:user /run/user/100000
 
 	# bind mount pulse socket 
-	mount --bind /opt/pulse /run/user/100000/pulse 
+	mount --bind /mnt/pulse /run/user/100000/pulse 
 
 	# symlink wayland display
-	ln -s /opt/display /run/display
+	ln -s /mnt/display /run/display
 
 	sleep 2
 fi
 
 # start xfce session
-su user -c /opt/guest/session_xfce4.sh
+su user -c "/opt/bin/startx $1"

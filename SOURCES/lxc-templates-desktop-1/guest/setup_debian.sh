@@ -27,12 +27,20 @@ apt install -y sudo xfce4 curl
 # add suer to sudoers
 adduser user sudo
 
-if [ ! -f "/opt/guest/blobs/Xwayland" ]
+if [ ! -f "/opt/bin/Xwayland" ]
 then
 	# get latest Xwayland blobs from sailfish-ubu-chroot
-	curl https://github.com/elros34/sailfish_ubu_chroot/raw/master/xwayland/Xwayland -L --output /opt/guest/blobs/Xwayland
-	chown user:user /opt/guest/blobs/Xwayland
-	chmod +x /opt/guest/blobs/Xwayland
+	mkdir -p /opt/bin
+
+	curl https://github.com/elros34/sailfish_ubu_chroot/raw/master/xwayland/Xwayland -L --output /opt/bin/Xwayland
+	chown user:user -R /opt/bin
+	chmod +x /opt/bin/Xwayland
+fi
+
+if [ ! -f "/opt/bin/startx" ]
+then
+	# set xfce4 as default session
+	ln -s /mnt/guest/sessions/xfce4.sh /opt/bin/startx
 fi
 
 echo "[+] container is ready!"
