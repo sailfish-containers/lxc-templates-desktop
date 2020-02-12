@@ -3,8 +3,8 @@
 *LXC templates adapted to SailfshOS*
 
 This package includes: 
-	- **lxc-templates** currently "lxc-templates" package shipped from jolla seems broke due to the lack of wget binaries and an old tar version that makes official LXC templates unusable on SailfishOS, "lxc-templates-desktop" aim to ship LXC containers adapted to work on SailfishOS
-	- **guest scripts** bash scripts meant to start desktop sessions inside containers
+ - **lxc-templates** currently "lxc-templates" package shipped from jolla seems broke due to the lack of wget binaries and an old tar version that makes official LXC templates unusable on SailfishOS, "lxc-templates-desktop" aim to ship LXC containers adapted to work on SailfishOS
+ - **guest scripts** bash scripts meant to start desktop sessions inside containers
 
 ## build (requires rpmbuild)
 ```
@@ -24,6 +24,7 @@ $ devel-su
 ## usage
 
 **create a container**
+
 once installed, you can create a new linux container as follows:
 
 ```
@@ -35,32 +36,38 @@ it is also possible to skip shell interaction by providing paramters to sfos-dow
 ```
 
 **start your new container**
+
 to start your freshly created container:
 ```
 # lxc-start -n mycontainer
 ```
 
 **attach to your container**
+
 ```
 # lxc-attach -n mycontainer
 ```
 
 **stop your container**
+
 ```
 # lxc-stop -n mycontainer
 ```
 
 **freeze your container to save battery life**
+
 ```
 # lxc-freeze -n mycontainer
 ```
 
 **unfreeze your container**
+
 ```
 # lxc-unfreeze -n mycontainer
 ```
 
 **destroy your container**
+
 ```
 # lxc-destroy -n mycontainer
 ```
@@ -71,12 +78,14 @@ This packages includes also some scripts meant to setup and start a desktop sess
 These scripts can be found on guest's /mnt/guest directory.
 
 **setup desktop**
+
 this script is meant to help configuring network and xfce4 environment on containers
 ```
 # lxc-attach -n mycontainer /mnt/guest/setup_debian.sh
 ```
 
 **start desktop**
+
 desktop sessions requires a qxcompositor's display socket inside /run/display/ directory, named "**wayland-container-ID**", to create it you can use:
 ```
 # qxcompositor --wayland-socket-name ../../desktop/wayland-container-0 &
