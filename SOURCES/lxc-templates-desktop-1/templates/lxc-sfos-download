@@ -235,14 +235,6 @@ while :; do
 	esac
 done
 
-# Check for required binaries
-for bin in tar xz wget; do
-	if ! command -V "${bin}" >/dev/null 2>&1; then
-		echo "ERROR: Missing required tool: ${bin}" 1>&2
-		exit 1
-	fi
-done
-
 # Check for GPG
 if [ "${DOWNLOAD_VALIDATE}" = "true" ]; then
 	if ! command -V gpg >/dev/null 2>&1; then
