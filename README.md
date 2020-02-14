@@ -6,6 +6,7 @@ This package includes:
  - **lxc-templates** currently "lxc-templates" package shipped from jolla seems broke due to the lack of wget and an old tar version that makes official LXC templates unusable on SailfishOS, "lxc-templates-desktop" aim to ship LXC containers adapted to work on SailfishOS
  - **guest scripts** bash scripts meant to start desktop sessions inside containers
 
+
 ## build (requires rpmbuild)
 ```
 $ cd
@@ -75,7 +76,7 @@ to start your freshly created container:
 ## desktop
 
 This packages includes also some scripts meant to setup and start a desktop session inside a container.
-These scripts can be found on guest's /mnt/guest directory.
+These scripts can be found on guest's /mnt/guest directory, currently only debian based systems are supported (debian,ubuntu,mint,kali,devuan).
 
 **setup desktop**
 
@@ -83,7 +84,7 @@ this script is meant to help configuring network and xfce4 environment on contai
 ```
 # lxc-attach -n mycontainer /mnt/guest/setup_debian.sh
 ```
-**ubuntu note:** since ubuntu cosmic is running libc **2.28** and xwayland'patch require libc **2.29** you'll need to install also these ".deb" packages from [elros34's sailfish_ubu_chroot](https://github.com/elros34/sailfish_ubu_chroot/): https://github.com/elros34/sailfish_ubu_chroot/tree/master/glibc 
+**ubuntu note:** since ubuntu cosmic is running libc **2.28** and xwayland patch require libc **2.29** you'll need to install also these ".deb" packages from [elros34's sailfish_ubu_chroot](https://github.com/elros34/sailfish_ubu_chroot/): https://github.com/elros34/sailfish_ubu_chroot/tree/master/glibc 
 
 **start desktop**
 
