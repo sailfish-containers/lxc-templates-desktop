@@ -62,14 +62,25 @@ cleanup() {
 
 download_file() {
 	# workaround for wget's tmp directory
+	# shouldn't be required anymore
+	rm -rf "$2"
 	mkdir -p "$2"
 	rm -rf "$2"
-		
+
+	# fix for connection issues
+	ec=18
+	while [ $ec -ne 0 ] 
+	do 
 		# replace wget with curl
-	curl "https://${DOWNLOAD_SERVER}/$1" -L -o "$2"
+		#curl "https://${DOWNLOAD_SERVER}/$1" -L -o "$2"
+		curl --output $2 -O -L -C - "https://${DOWNLOAD_SERVER}/$1"
+		ec=$? 
+	done
+		
+
 	
-	#echo "https://${DOWNLOAD_SERVER}/$1"
-	#echo "$2"
+	echo "https://${DOWNLOAD_SERVER}/$1"
+	echo "$2"
 }
 
 download_sig() {
@@ -387,8 +398,8 @@ if [ "${DOWNLOAD_USE_CACHE}" = "false" ]; then
 	DOWNLOAD_INDEX_PATH="/meta/1.0/index-${DOWNLOAD_MODE}"
 
 	echo "Downloading the image index"
-	if ! download_file "${DOWNLOAD_INDEX_PATH}.${DOWNLOAD_COMPAT_LEVEL}" "${DOWNLOAD_TEMP}/index" noexit ||
-		 ! download_sig "${DOWNLOAD_INDEX_PATH}.${DOWNLOAD_COMPAT_LEVEL}.asc" "${DOWNLOAD_TEMP}/index.asc" noexit; then
+	if ! download_file "${DOWNLOAD_INDEX_PATH}" "${DOWNLOAD_TEMP}/index" noexit ||
+		 ! download_sig "${DOWNLOAD_INDEX_PATH}" "${DOWNLOAD_TEMP}/index.asc" noexit; then
 		download_file "${DOWNLOAD_INDEX_PATH}" "${DOWNLOAD_TEMP}/index" normal
 		download_sig "${DOWNLOAD_INDEX_PATH}.asc" "${DOWNLOAD_TEMP}/index.asc" normal
 	fi
@@ -528,7 +539,7 @@ sed -i -e "/lxc./{w ${LXC_PATH}/config-auto" -e "d}" "${LXC_PATH}/config"
 	echo "lxc.mount.entry = /run/user/100000/pulse mnt/pulse none bind,create=dir 0 0"
 
 	echo "# mount guest additions readonly"
-	echo "lxc.mount.entry = /usr/share/sailfish-containers/guest mnt/lxc_guest/ none bind,ro,create=dir 0 0"
+	echo "lxc.mount.entry = /usr/share/sailfish-containers/guest mnt/guest/ none bind,ro,create=dir 0 0"
 
 	echo "# optional : host home directory"
 	echo "#lxc.mount.entry = /home/nemo home/host_home none bind,create=dir,ro 0 0"

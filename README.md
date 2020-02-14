@@ -3,7 +3,7 @@
 *LXC templates adapted to SailfshOS*
 
 This package includes: 
- - **lxc-templates** currently "lxc-templates" package shipped from jolla seems broke due to the lack of wget binaries and an old tar version that makes official LXC templates unusable on SailfishOS, "lxc-templates-desktop" aim to ship LXC containers adapted to work on SailfishOS
+ - **lxc-templates** currently "lxc-templates" package shipped from jolla seems broke due to the lack of wget and an old tar version that makes official LXC templates unusable on SailfishOS, "lxc-templates-desktop" aim to ship LXC containers adapted to work on SailfishOS
  - **guest scripts** bash scripts meant to start desktop sessions inside containers
 
 ## build (requires rpmbuild)
@@ -83,10 +83,11 @@ this script is meant to help configuring network and xfce4 environment on contai
 ```
 # lxc-attach -n mycontainer /mnt/guest/setup_debian.sh
 ```
+**ubuntu note:** since ubuntu cosmic is running libc **2.28** and xwayland'patch require libc **2.29** you'll need to install also these ".deb" packages from [elros34's sailfish_ubu_chroot](https://github.com/elros34/sailfish_ubu_chroot/): https://github.com/elros34/sailfish_ubu_chroot/tree/master/glibc 
 
 **start desktop**
 
-desktop sessions requires a qxcompositor's display socket inside /run/display/ directory, named "**wayland-container-ID**", to create it you can use:
+desktop sessions requires a qxcompositor's display socket inside /run/display/ directory, named "**wayland-container-[ID]**", to create it you can use:
 ```
 # qxcompositor --wayland-socket-name ../../display/wayland-container-0 &
 ```

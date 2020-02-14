@@ -7,11 +7,14 @@ then
 	exit 0
 fi
 
+# get user id
+USER_ID=`id -u`
+
 # unset sfos variables
 unset BROWSER
 
 # set env
-export XDG_RUNTIME_DIR=/run/user/100000
+export XDG_RUNTIME_DIR=/run/user/$USER_ID
 export WAYLAND_DISPLAY="../../display/wayland-container-$1" # connect to qxcompositor wayland socket
 
 export LANG=C
