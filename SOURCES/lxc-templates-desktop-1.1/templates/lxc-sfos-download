@@ -283,6 +283,7 @@ fi
 
 # Trap all exit signals
 trap cleanup EXIT HUP INT TERM
+mkdir -p "${LXC_PATH}"
 
 # /tmp may be mounted in tmpfs or noexec
 if mountpoint -q /tmp; then
@@ -485,7 +486,6 @@ fi
 LXC_ROOTFS="${LXC_ROOTFS}/${LXC_NAME}"
 
 mkdir -p "${LXC_ROOTFS}"
-mkdir -p "${LXC_PATH}"
 
 touch ${LXC_PATH}/config
 xz -cd "${LXC_CACHE_PATH}/rootfs.tar.xz" | tar xvf - -C "${LXC_ROOTFS}"
