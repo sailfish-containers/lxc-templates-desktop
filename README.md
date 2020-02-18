@@ -7,7 +7,7 @@ This package includes:
  - **guest scripts** bash scripts meant to start desktop sessions inside containers
 
 
-## build (requires rpmbuild)
+## build (require rpmbuild)
 ```
 $ cd
 $ git clone git@github.com:sailfish-containers/lxc-templates-desktop.git
@@ -84,7 +84,8 @@ this script is meant to help configuring network and xfce4 environment on contai
 ```
 # lxc-attach -n mycontainer /mnt/guest/setup_debian.sh
 ```
-**ubuntu note:** since ubuntu cosmic is running libc **2.28** and xwayland patch require libc **2.29** you'll need to install also these ".deb" packages from [elros34's sailfish_ubu_chroot](https://github.com/elros34/sailfish_ubu_chroot/): https://github.com/elros34/sailfish_ubu_chroot/tree/master/glibc 
+**libc note:** since some distro are running libc6 **2.28** (for example ubuntu cosmic) and xwayland patch require libc6 **2.29**, it is suggested to use "newer" releases like ubuntu bionic and debian sid.
+Otherwise you'll need to install also these ".deb" packages from [elros34's sailfish_ubu_chroot](https://github.com/elros34/sailfish_ubu_chroot/): https://github.com/elros34/sailfish_ubu_chroot/tree/master/glibc 
 
 **start desktop**
 
