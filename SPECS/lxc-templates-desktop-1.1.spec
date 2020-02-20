@@ -1,6 +1,6 @@
 Name:           lxc-templates-desktop
 Version:        1.1
-Release:        2
+Release:        3
 Summary:        LXC templates adapted to sailfishOS
 Packager:       sailfish containers
 Group:          Application/Other
@@ -8,7 +8,7 @@ License:        GPL
 URL:            https://github.com/sailfish-containers
 Source0:        %{name}-%{version}.tar.gz
 BuildArch:      noarch
-Requires:       lxc
+Requires:       lxc, lxc-templates
 
 %description
 LXC templates adapted to SailfishOS
@@ -49,6 +49,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc
 
 %changelog
+* Fri Feb 21 2020 sailfish containers
+- fixed missing dependency thanks to mosen and kabouik
+- first public pre-release build available
+
 * Tue Feb 18 2020 sailfish containers
 - containers rootfs moved to /home/.lxc
 - rewrote config part

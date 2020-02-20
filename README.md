@@ -84,8 +84,8 @@ this script is meant to help configuring network and xfce4 environment on contai
 ```
 # lxc-attach -n mycontainer /mnt/guest/setup_debian.sh
 ```
-**libc note:** since some distro are running libc6 **2.28** (for example ubuntu cosmic) and xwayland patch require libc6 **2.29**, it is suggested to use "newer" releases like ubuntu bionic and debian sid.
-Otherwise you'll need to install also these ".deb" packages from [elros34's sailfish_ubu_chroot](https://github.com/elros34/sailfish_ubu_chroot/): https://github.com/elros34/sailfish_ubu_chroot/tree/master/glibc 
+**libc note:** the setup script currently download a patched xwayland binary compiled for armhf on libc6 **2.29**, containers need the same libc6 version in order to start it, otherwise you'll need to install also these ".deb" packages from [elros34's sailfish_ubu_chroot](https://github.com/elros34/sailfish_ubu_chroot/): https://github.com/elros34/sailfish_ubu_chroot/tree/master/glibc as an extra steps.
+Currently debian sid and kali linux are tested to be working out of the box.
 
 **start desktop**
 
