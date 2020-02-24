@@ -85,3 +85,4 @@ then
 fi
 
 echo "[+] container is ready!"
+echo "[+] remember to set a password for the user: ${USER_NAME}"

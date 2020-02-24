@@ -5,8 +5,8 @@
 # check if user setup is required
 if [ ! -d "/home/${USER_NAME}" ]
 then
-	# add user 
-	adduser --uid $USER_UID $USER_NAME
+	# add user without interaction
+	adduser --disabled-password --gecos "" --uid $USER_UID $USER_NAME
 	sleep 1
 
 	# add android group inet for _apt and user
