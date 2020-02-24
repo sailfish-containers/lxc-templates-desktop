@@ -1,6 +1,6 @@
 # lxc-templates-desktop
 
-Currently templates included in jolla's "lxc-templates" package seems unusable due to the lack of "wget" package, used by lxc-download to fetch data from repositories, and an uncompatible "tar" version, used to uncompress downloaded rootfs and template's metadata.
+Currently templates included in jolla's "lxc-templates" package seems unusable due to the lack of "wget" package, used by lxc-download to fetch data from repositories, and an incompatible "tar" version, used to uncompress downloaded rootfs and template's metadata.
 lxc-templates-desktop aim to bring LXC templates adapted to circumvent these SailfishOS's limitations.
 
 ## build (require rpmbuild)
