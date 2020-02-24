@@ -6,7 +6,6 @@ then
 	echo "[+] usage: $0 [wayland-display-id]"
 	exit 0
 fi
-
 if [ "$#" -ne 2 ] 
 then
 	# if not args provided
@@ -14,11 +13,16 @@ then
 	USER_UID=100000
 else
 	# set custom user uid
-	USER_UID=$1
+	USER_UID=$2
 fi
-
-# set default user
-USER_NAME="user"
+if [ "$#" -ne 3 ] 
+then
+	# set default user
+	USER_NAME="user"
+else
+	# set custom user uid
+	USER_NAME=$3
+fi
 
 if [ ! -d "/run/user/$USER_UID" ]
 then

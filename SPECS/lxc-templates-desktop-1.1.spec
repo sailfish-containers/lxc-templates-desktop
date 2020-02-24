@@ -1,6 +1,6 @@
 Name:           lxc-templates-desktop
 Version:        1.1
-Release:        3
+Release:        4
 Summary:        LXC templates adapted to sailfishOS
 Packager:       sailfish containers
 Group:          Application/Other
@@ -31,9 +31,10 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest
 cp -ar guest/* $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest
 
 # make scripts executable
-chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/setup_debian.sh
+chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/setup_desktop.sh
 chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/start_desktop.sh
 chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/sessions/*.sh
+chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/setups/*.sh
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -43,12 +44,19 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/lxc/templates
 %dir /usr/share/sailfish-containers/guest
 /usr/share/lxc/templates/lxc-sfos-download
-/usr/share/sailfish-containers/guest/setup_debian.sh
+/usr/share/sailfish-containers/guest/setup_desktop.sh
 /usr/share/sailfish-containers/guest/start_desktop.sh
 /usr/share/sailfish-containers/guest/sessions/xfce4.sh
+/usr/share/sailfish-containers/guest/setups/debian.sh
 %doc
 
 %changelog
+* Mon Feb 24 2020 sailfish containers
+- multiarch support
+- QT scaling fix
+- improved setup_desktop.sh
+- moved lxc cache to /home/.lxc
+
 * Fri Feb 21 2020 sailfish containers
 - fixed missing dependency thanks to mosen and kabouik
 - first public pre-release build available

@@ -1,11 +1,7 @@
 # lxc-templates-desktop
 
-*LXC templates adapted to SailfshOS*
-
-This package includes: 
- - **lxc-templates** currently "lxc-templates" package shipped from jolla seems broke due to the lack of wget and an old tar version that makes official LXC templates unusable on SailfishOS, "lxc-templates-desktop" aim to ship LXC containers adapted to work on SailfishOS
- - **guest scripts** bash scripts meant to start desktop sessions inside containers
-
+Currently templates included in jolla's "lxc-templates" package seems unusable due to the lack of "wget" package, used by lxc-download to fetch data from repositories, and an uncompatible "tar" version, used to uncompress downloaded rootfs and template's metadata.
+lxc-templates-desktop aim to bring LXC templates adapted to circumvent these SailfishOS's limitations.
 
 ## build (require rpmbuild)
 ```
@@ -26,7 +22,7 @@ $ devel-su
 
 **create a container**
 
-once installed, you can create a new linux container as follows:
+once installed, you can start creating your first (mobile) linux container as follows:
 
 ```
 # lxc-create -t sfos-download -n mycontainer
@@ -44,6 +40,7 @@ to start your freshly created container:
 ```
 
 **attach to your container**
+to start a shelll session on "mycontainer"
 
 ```
 # lxc-attach -n mycontainer
@@ -82,10 +79,10 @@ These scripts can be found on guest's /mnt/guest directory, currently only debia
 
 this script is meant to help configuring network and xfce4 environment on containers
 ```
-# lxc-attach -n mycontainer /mnt/guest/setup_debian.sh
+# lxc-attach -n mycontainer /mnt/guest/setup_desktop.sh
 ```
-**libc note:** the setup script currently download a patched xwayland binary compiled for armhf on libc6 **2.29**, containers need the same libc6 version in order to start it, otherwise you'll need to install also these ".deb" packages from [elros34's sailfish_ubu_chroot](https://github.com/elros34/sailfish_ubu_chroot/): https://github.com/elros34/sailfish_ubu_chroot/tree/master/glibc as an extra steps.
-Currently debian sid and kali linux are tested to be working out of the box.
+*note: a patched version of Xwayland is required in order to get touch screen working on desktops, setup_desktop.sh will automatically download it from https://github.com/sailfish-containers/xserver/releases*
+
 
 **start desktop**
 

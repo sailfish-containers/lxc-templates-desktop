@@ -23,14 +23,12 @@ export EGL_DRIVER=egl_gallium
 export QT_QPA_PLATFORM=xcb # force qt applications backend to Xwayland
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/games:/usr/local/sbin:/sbin
 
-#export BROWSER=chromium # replaces sailfish-browser
 #export CHROMIUM_SCALE=1.5
 
-# qt applications incorrect scaling fix : break telegram desktop
-# to fix telegram start with QT_SCALE_FACTOR=1
+# qt applications incorrect scaling fix 
 export QT_SCALE_FACTOR=0.1
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
-export QT_FONT_DPI=1400
+export QT_FONT_DPI=2000
 
 # start dbus session
 export $(dbus-launch)

@@ -360,7 +360,10 @@ fi
 
 # Setup the cache
 if [ "${DOWNLOAD_TARGET}" = "system" ]; then
-  LXC_CACHE_BASE="${LOCALSTATEDIR}/cache/lxc/"
+  #LXC_CACHE_BASE="${LOCALSTATEDIR}/cache/lxc/"
+  LXC_CACHE_BASE="/home/.lxc/lxc_cache/"
+  
+  mkdir -p $LXC_CACHE_BASE
 else
   LXC_CACHE_BASE="${HOME}/.cache/lxc/"
 fi
