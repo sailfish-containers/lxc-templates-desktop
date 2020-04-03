@@ -1,6 +1,6 @@
 Name:           lxc-templates-desktop
-Version:        1.1
-Release:        4
+Version:        1.2
+Release:        1
 Summary:        LXC templates adapted to sailfishOS
 Packager:       sailfish containers
 Group:          Application/Other
@@ -27,14 +27,14 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/lxc/templates
 cp templates/* $RPM_BUILD_ROOT/usr/share/lxc/templates/
 
 # create quest scripts directory
-mkdir -p $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest
-cp -ar guest/* $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest
+#mkdir -p $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest
+#cp -ar guest/* $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest
 
 # make scripts executable
-chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/setup_desktop.sh
-chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/start_desktop.sh
-chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/sessions/*.sh
-chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/setups/*.sh
+#chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/setup_desktop.sh
+#chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/start_desktop.sh
+#chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/sessions/*.sh
+#chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/setups/*.sh
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -42,15 +42,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %dir /usr/share/lxc/templates
-%dir /usr/share/sailfish-containers/guest
 /usr/share/lxc/templates/lxc-sfos-download
-/usr/share/sailfish-containers/guest/setup_desktop.sh
-/usr/share/sailfish-containers/guest/start_desktop.sh
-/usr/share/sailfish-containers/guest/sessions/xfce4.sh
-/usr/share/sailfish-containers/guest/setups/debian.sh
 %doc
 
 %changelog
+* Fri Apr 3 2020 sailfish containers
+- moved guest scripts from lxc-templates-desktop to harbour-containers
+- removed default guest mountpoint
+
 * Mon Feb 24 2020 sailfish containers
 - multiarch support
 - QT scaling fix

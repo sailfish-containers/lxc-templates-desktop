@@ -532,9 +532,6 @@ sed -i -e "/lxc./{w ${LXC_PATH}/config-auto" -e "d}" "${LXC_PATH}/config"
   echo "# mount pulseaudio socket"
   echo "lxc.mount.entry = /run/user/100000/pulse mnt/pulse none bind,create=dir 0 0"
 
-  echo "# mount guest additions readonly"
-  echo "lxc.mount.entry = /usr/share/sailfish-containers/guest mnt/guest/ none bind,ro,create=dir 0 0"
-
   echo "# optional : host home directory"
   echo "#lxc.mount.entry = /home/nemo home/host_home none bind,create=dir,ro 0 0"
 
