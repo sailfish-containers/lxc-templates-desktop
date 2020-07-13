@@ -7,6 +7,7 @@ Group:          Application/Other
 License:        GPL
 URL:            https://github.com/sailfish-containers
 Source0:        %{name}-%{version}.tar.gz
+BuildRequires:	pkgconfig(Qt5Core)
 BuildArch:      noarch
 Requires:       lxc, lxc-templates
 
@@ -14,27 +15,15 @@ Requires:       lxc, lxc-templates
 LXC templates adapted to SailfishOS
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}
 
 %build
+%qmake5
 
 %install
 # clean build root
 rm -rf $RPM_BUILD_ROOT
-
-# add sailfishos's patched lxc templates
-mkdir -p $RPM_BUILD_ROOT/usr/share/lxc/templates
-cp templates/* $RPM_BUILD_ROOT/usr/share/lxc/templates/
-
-# create quest scripts directory
-#mkdir -p $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest
-#cp -ar guest/* $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest
-
-# make scripts executable
-#chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/setup_desktop.sh
-#chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/start_desktop.sh
-#chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/sessions/*.sh
-#chmod +x $RPM_BUILD_ROOT/usr/share/sailfish-containers/guest/setups/*.sh
+%qmake5_install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
