@@ -31,7 +31,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %dir /usr/share/lxc/templates
-/usr/share/lxc/templates/lxc-sfos-download
+%attr(4755, root, root) /usr/share/lxc/templates/lxc-sfos-download
 %doc
 
 %changelog
