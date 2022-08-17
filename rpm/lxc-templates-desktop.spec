@@ -13,6 +13,23 @@ Requires:       lxc, lxc-templates
 
 %description
 LXC templates adapted to SailfishOS
+# This description section includes metadata for SailfishOS:Chum, see
+# https://github.com/sailfishos-chum/main/blob/main/Metadata.md
+%if "%{?vendor}" == "chum"
+PackageName: lxc-templates-desktop
+Type: console-application
+DeveloperName: r3vn
+Categories:
+ - Development
+ - Utilities
+ - Other
+Custom:
+  Repo: https://github.com/kabouik/lxc-templates-desktop
+Url:
+  Homepage: https://github.com/kabouik/lxc-templates-desktop
+  Help: https://github.com/sailfish-containers/lxc-templates-desktop/wiki
+  Bugtracker: https://github.com/sailfish-containers/harbour-containers/issues
+%endif
 
 %prep
 %setup -q -n %{name}-%{version}
