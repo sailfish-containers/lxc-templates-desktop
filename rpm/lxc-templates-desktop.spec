@@ -1,11 +1,11 @@
 Name:           lxc-templates-desktop
-Version:        1.2
+Version:        1.3
 Release:        1
-Summary:        LXC templates adapted to sailfishOS
+Summary:        LXC templates adapted to SailfishOS
 Packager:       sailfish containers
 Group:          Application/Other
-License:        GPL
-URL:            https://github.com/sailfish-containers
+License:        GPLv2+
+URL:            https://github.com/sailfish-containers/lxc-templates-desltop
 Source0:        %{name}-%{version}.tar.gz
 BuildRequires:	pkgconfig(Qt5Core)
 BuildArch:      noarch
@@ -13,6 +13,23 @@ Requires:       lxc, lxc-templates
 
 %description
 LXC templates adapted to SailfishOS
+# This description section includes metadata for SailfishOS:Chum, see
+# https://github.com/sailfishos-chum/main/blob/main/Metadata.md
+%if "%{?vendor}" == "chum"
+PackageName: lxc-templates-desktop
+Type: console-application
+DeveloperName: r3vn
+Categories:
+ - Development
+ - Utilities
+ - Other
+Custom:
+  Repo: https://github.com/sailfish-containers/lxc-templates-desktop
+Url:
+  Homepage: https://github.com/sailfish-containers/lxc-templates-desktop
+  Help: https://github.com/sailfish-containers/lxc-templates-desktop/wiki
+  Bugtracker: https://github.com/sailfish-containers/harbour-containers/issues
+%endif
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -35,6 +52,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc
 
 %changelog
+* Thu Aug 19 2022 kabouik
+- Updated description and license for Chum repository
+- Bumped version to avoid dep resolution issues
+
 * Fri Apr 3 2020 sailfish containers
 - moved guest scripts from lxc-templates-desktop to harbour-containers
 - removed default guest mountpoint
