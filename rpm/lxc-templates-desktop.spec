@@ -5,7 +5,7 @@ Summary:        LXC templates adapted to SailfishOS
 Packager:       sailfish containers
 Group:          Application/Other
 License:        GNU GPLv2.1
-URL:            https://github.com/kabouik/lxc-templates-desltop
+URL:            https://github.com/sailfish-containers/lxc-templates-desltop
 Source0:        %{name}-%{version}.tar.gz
 BuildRequires:	pkgconfig(Qt5Core)
 BuildArch:      noarch
@@ -24,9 +24,9 @@ Categories:
  - Utilities
  - Other
 Custom:
-  Repo: https://github.com/kabouik/lxc-templates-desktop
+  Repo: https://github.com/sailfish-containers/lxc-templates-desktop
 Url:
-  Homepage: https://github.com/kabouik/lxc-templates-desktop
+  Homepage: https://github.com/sailfish-containers/lxc-templates-desktop
   Help: https://github.com/sailfish-containers/lxc-templates-desktop/wiki
   Bugtracker: https://github.com/sailfish-containers/harbour-containers/issues
 %endif
@@ -52,9 +52,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc
 
 %changelog
-* Thu Aug 18 2022 sailfish containers
+* Thu Aug 19 2022 kabouik
 - Updated description and license for Chum repository
-- Changed URLs to reflect the corresponding fork
 - Bumped version to avoid dep resolution issues
 
 * Fri Apr 3 2020 sailfish containers
