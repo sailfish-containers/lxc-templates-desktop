@@ -1,5 +1,5 @@
 Name:           lxc-templates-desktop
-Version:        1.3
+Version:        1.4
 Release:        1
 Summary:        LXC templates adapted to SailfishOS
 Packager:       sailfish containers
@@ -18,7 +18,7 @@ LXC templates adapted to SailfishOS
 %if "%{?vendor}" == "chum"
 PackageName: lxc-templates-desktop
 Type: console-application
-DeveloperName: r3vn
+DeveloperName: sailfish-containerrs
 Categories:
  - Development
  - Utilities
@@ -52,6 +52,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc
 
 %changelog
+* Sun Aug 28 2022 kabouik
+- Add defaults for mounting sound card in LXC (tested on Pro1x only)
+
 * Thu Aug 19 2022 kabouik
 - Updated description and license for Chum repository
 - Bumped version to avoid dep resolution issues
