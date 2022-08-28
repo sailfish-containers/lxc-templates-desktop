@@ -532,6 +532,10 @@ sed -i -e "/lxc./{w ${LXC_PATH}/config-auto" -e "d}" "${LXC_PATH}/config"
   echo "# mount pulseaudio socket"
   echo "lxc.mount.entry = /run/user/100000/pulse mnt/pulse none bind,create=dir 0 0"
 
+  echo "# Audio"
+  echo "lxc.cgroup.devices.allow = c 116:* rwm"
+  echo "lxc.mount.entry = /dev/snd dev/snd none bind,optional,create=dir"
+
   echo "# optional : host home directory"
   echo "#lxc.mount.entry = /home/nemo home/host_home none bind,create=dir,ro 0 0"
 
